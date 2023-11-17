@@ -1,1 +1,1 @@
-# -app
+使用HTML5作为app主框架，利用JavaScript实现具体服务
