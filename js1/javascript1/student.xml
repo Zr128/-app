@@ -1,0 +1,15 @@
+<office>
+  <students>
+    <student>
+      <name>John Doe</name>
+      <age>20</age>
+      <grade>12</grade>
+    </student>
+    <student>
+      <name>Jane Smith</name>
+      <age>19</age>
+      <grade>11</grade>
+    </student>
+    <!-- Add more student entries as needed -->
+  </students>
+</office>

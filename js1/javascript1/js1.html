@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>校园服务应用</title>
+  <style>
+    /* CSS样式可以用于美化应用程序 */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      color: #333333;
+    }
+    #login-form {
+      margin: 20px;
+      padding: 20px;
+      background-color: #ffffff;
+      border: 1px solid #cccccc;
+      max-width: 300px;
+    }
+
+    #login-form input[type="text"],
+    #login-form input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    #login-form input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #4caf50;
+      color: #ffffff;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>校园服务应用</h1>
+  <link rel="stylesheet" href="styles.css">
+  <div id="login-form">
+    <h2>登录</h2>
+    <input type="text" id="username" placeholder="用户名">
+    <input type="password" id="password" placeholder="密码">
+    <input type="submit" value="登录">
+  </div>
+
+  <ul id="service-list"></ul>
+  <button id="login-button">登录</button>
+  <script src="login.js"></script>
+  <script>
+    var loginButton = document.getElementById("login-button");
+    loginButton.addEventListener("click", function() {
+  // 登录函数
+  function login(username, password) {
+    // 进行用户名和密码验证
+    if (username === "admin" && password === "password") {
+      // 登录成功，返回校园服务列表
+      return services;
+    } else {
+      // 登录失败，返回空数组
+      return [];
+    }
+  }
+      window.location.href = "service.html";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>校园服务应用</title>
+  <link rel="stylesheet" href="styles.css">
+  
+</head>
+<body>
+  <h1>服务选择和实现界面</h1>
+  <button id="libraryBtn">图书馆服务</button>
+  <button id="cafeteriaBtn">餐厅服务</button>
+  <button id="gymBtn">健身房服务</button>
+  <button id="officeBtn">办公室服务</button>
+  
+  <div id="libraryService" style="display: none;">
+    <h2>图书馆服务</h2>
+  <button id="addBookBtn">添加图书</button>
+  <button id="removeBookBtn">移除图书</button>
+  <button id="searchBookBtn">搜索图书</button>
+  <!-- 其他图书馆服务相关的页面内容 -->
+  </div>
+  
+  <div id="cafeteriaService" style="display: none;">
+    <h2>餐厅服务</h2>
+  <button id="addToMenuBtn">添加菜品</button>
+  <button id="removeFromMenuBtn">移除菜品</button>
+  <button id="getMenuBtn">查看菜单</button>
+  <!-- 其他餐厅服务相关的页面内容 -->
+  </div>
+  
+  <div id="gymService" style="display: none;">
+    <h2>健身房服务</h2>
+    <button id="bookSlotBtn">预约健身房</button>
+    <button id="cancelBookingBtn">取消预约</button>
+    <button id="addEquipmentBtn">添加设备</button>
+    <!-- 其他健身房服务相关的页面内容 -->
+  </div>
+  
+  <div id="officeService" style="display: none;">
+    <h2>办公室服务</h2>
+  <button id="addStudentBtn">添加学生</button>
+  <button id="removeStudentBtn">移除学生</button>
+  <button id="getStudentTableBtn">查看学生表格</button>
+  <!-- 其他办公室服务相关的页面内容 -->
+  </div>
+  <script>
+    class Library {
+    constructor(openTime, closeTime) {
+      this.books = [];
+      this.openTime = openTime;
+      this.closeTime = closeTime;
+      this.seats = [];
+    }
+  
+    addBook(book) {
+      this.books.push(book);
+    }
+  
+    removeBook(book) {
+      const index = this.books.indexOf(book);
+      if (index > -1) {
+        this.books.splice(index, 1);
+        return true;
+      }
+      return false;
+    }
+  
+    searchBook(title) {
+      return this.books.find(book => book.title === title);
+    }
+  
+    reserveSeat(seat) {
+      if (!seat.isReserved) {
+        seat.isReserved = true;
+        return true;
+      }
+      return false;
+    }
+  
+    releaseSeat(seat) {
+      if (seat.isReserved) {
+        seat.isReserved = false;
+        return true;
+      }
+      return false;
+    }
+  }
+  class Cafeteria {
+    constructor() {
+      this.menu = [];
+      this.highSalesItems = [];
+    }
+  
+    addToMenu(item) {
+      this.menu.push(item);
+    }
+  
+    removeFromMenu(item) {
+      const index = this.menu.indexOf(item);
+      if (index > -1) {
+        this.menu.splice(index, 1);
+        return true;
+      }
+      return false;
+    }
+  
+    getMenu() {
+      return this.menu;
+    }
+  
+    updateHighSalesItems() {
+      this.highSalesItems = this.menu.filter(item => item.sales > 100);
+    }
+  
+    getHighSalesItems() {
+      return this.highSalesItems;
+    }
+  }
+  class Gym {
+    constructor(openTime, closeTime) {
+      this.available = true;
+      this.bookings = [];
+      this.openTime = openTime;
+      this.closeTime = closeTime;
+      this.equipment = [];
+    }
+  
+    bookSlot(user) {
+      if (this.available) {
+        this.bookings.push(user);
+        this.available = false;
+        return true;
+      }
+      return false;
+    }
+  
+    cancelBooking(user) {
+      const index = this.bookings.indexOf(user);
+      if (index > -1) {
+        this.bookings.splice(index, 1);
+        if (this.bookings.length === 0) {
+          this.available = true;
+        }
+        return true;
+      }
+      return false;
+    }
+  
+    addEquipment(equipment) {
+      this.equipment.push(equipment);
+    }
+  
+    removeEquipment(equipment) {
+      const index = this.equipment.indexOf(equipment);
+      if (index > -1) {
+        this.equipment.splice(index, 1);
+        return true;
+      }
+      return false;
+    }
+  
+    isEquipmentInUse(equipment) {
+      return this.bookings.some(user => user.equipment === equipment);
+    }
+  }
+  class Office {
+    constructor() {
+      this.students = [];
+    }
+  
+    addStudent(student) {
+      this.students.push(student);
+    }
+  
+    removeStudent(student) {
+      const index = this.students.indexOf(student);
+      if (index > -1) {
+        this.students.splice(index, 1);
+        return true;
+      }
+      return false;
+    }
+  
+    getStudentTable() {
+      const table = [];
+      table.push(['Name', 'Age', 'Grade']);
+      this.students.forEach(student => {
+        table.push([student.name, student.age, student.grade]);
+      });
+      return table;
+    }
+  }
+    // 获取 "查看学生信息" 按钮元素
+  const getStudentTableBtn = document.getElementById("getStudentTableBtn");
+  
+  // 添加点击事件处理程序
+  getStudentTableBtn.addEventListener("click", function() {
+    // 执行页面跳转操作
+    window.location.href = "C:/Users/Zr-rui/js1/javascript1/student.html";
+  });
+  // 获取服务选择按钮元素
+    const libraryBtn = document.getElementById("libraryBtn");
+  const cafeteriaBtn = document.getElementById("cafeteriaBtn");
+  const gymBtn = document.getElementById("gymBtn");
+  const officeBtn = document.getElementById("officeBtn");
+  
+  // 获取服务实现界面元素
+  const libraryService = document.getElementById("libraryService");
+  const cafeteriaService = document.getElementById("cafeteriaService");
+  const gymService = document.getElementById("gymService");
+  const officeService = document.getElementById("officeService");
+  
+  // 添加事件监听器
+  libraryBtn.addEventListener("click", function() {
+    // 显示图书馆服务实现界面
+    libraryService.style.display = "block";
+    // 隐藏其他服务实现界面
+    cafeteriaService.style.display = "none";
+    gymService.style.display = "none";
+    officeService.style.display = "none";
+  });
+  
+  cafeteriaBtn.addEventListener("click", function() {
+    // 显示餐厅服务实现界面
+    cafeteriaService.style.display = "block";
+    // 隐藏其他服务实现界面
+    libraryService.style.display = "none";
+    gymService.style.display = "none";
+    officeService.style.display = "none";
+  });
+  
+  gymBtn.addEventListener("click", function() {
+    // 显示健身房服务实现界面
+    gymService.style.display = "block";
+    // 隐藏其他服务实现界面
+    libraryService.style.display = "none";
+    cafeteriaService.style.display = "none";
+    officeService.style.display = "none";
+  });
+  
+  officeBtn.addEventListener("click", function() {
+    // 显示办公室服务实现界面
+    officeService.style.display = "block";
+    // 隐藏其他服务实现界面
+    libraryService.style.display = "none";
+    cafeteriaService.style.display = "none";
+    gymService.style.display = "none";
+  });
+  </script>
+  <script src="service.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>读取 XML 文件</title>
+</head>
+<body>
+  <h1>读取 XML 文件</h1>
+
+  <script>
+    // 创建 XMLHttpRequest 对象
+    var xhttp = new XMLHttpRequest();
+
+    // 设置请求的方法、文件路径以及是否异步处理
+    xhttp.open("GET", "C:/Users/Zr-rui/js1/javascript1/student.xml", true);
+
+    // 设置请求的数据类型为 XML
+    xhttp.setRequestHeader("Content-Type", "text/xml");
+
+    // 定义请求完成后的回调函数
+    xhttp.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) {
+        // 获取响应的 XML 数据
+        var xmlData = this.responseXML;
+
+        // 在控制台输出 XML 数据
+        console.log(xmlData);
+
+        // 进行进一步的 XML 数据处理
+        // ...
+      }
+    };
+
+    // 发送请求
+    xhttp.send();
+  </script>
+</body>
+</html>
